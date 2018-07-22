@@ -1,0 +1,50 @@
+<div class="row">
+
+    <div class="col-md-4 text-center">
+        <ul class="list-group" >
+            <li class="list-group-item" style="background-color:	#F8F8F8;"><b>Subreddits</b></li>
+
+            <li *ngFor="let subreddit of subreddits  | paginate: { itemsPerPage: pageSize, currentPage: p }" class="list-group-item categoriaSubreddit" (click)="seleccionar(subreddit)">
+                <div class="row"  *ngIf="subreddit.data.icon_img" >
+                    <div class="col-md-5 text-center">
+                        <img [src]='subreddit.data.icon_img' height="110" width="110">
+                    </div>
+                    <div class="col-md-7 text-center">
+                        <p>
+                          {{subreddit.data.title}}
+                        </p>
+                          {{subreddit.data.public_description}}
+                    </div>
+
+                </div>
+                <div class="row"  *ngIf="!subreddit.data.icon_img" >
+                        <div class="col-md-5 text-center">
+                            <img src='http://www.sanisidrolonas.com.ar/wp-content/uploads/2013/07/sin-imagen3.jpg' height="110" width="110">
+                        </div>
+                        <div class="col-md-7 text-center">
+                            <p>
+                                {{subreddit.data.title}}
+                            </p>
+                                {{subreddit.data.public_description}}
+                        </div>
+    
+                    </div>
+            </li>
+            <pagination-controls (pageChange)="p = $event" (pageChange)="cargarMas()"
+            previousLabel="Previous"
+            nextLabel="Next"
+            autoHide="true">
+            </pagination-controls>
+        </ul>
+    </div>
+
+    <div class="col-md-8 text-center" *ngIf="comments">
+        <app-subreddit [subreddit]="seleccion" [comments]="comments"></app-subreddit>
+    </div>
+
+</div>
+
+
+
+
+
